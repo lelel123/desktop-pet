@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "desktop-pet"
+version = "1.0.0"
+description = "A cute, configurable desktop pet built with PySide6 — transparent, always-on-top, draggable, with idle/sleep states and speech bubbles."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = ["desktop-pet", "pyside6", "qt", "toy", "widget", "tray"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Desktop Environment",
+]
+dependencies = ["PySide6>=6.5"]
+
+[project.scripts]
+desktop-pet = "pet.main:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "PyInstaller>=6"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["pet"]
+
+[tool.setuptools.package-data]
+pet = ["dialogues.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+# Let tests import the package from src/ without needing an editable install
+# (works on CI and on machines where site-packages .pth handling differs).
+pythonpath = ["src"]
